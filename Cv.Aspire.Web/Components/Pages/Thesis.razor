@@ -1,0 +1,17 @@
+﻿@page "/Thesis"
+
+<PageTitle>Master Thesis</PageTitle>
+
+<h1>Master Thesis - Video based fog removal</h1>
+<b><a href="thesis/Thesis.pdf" target="_blank">Thesis</a></b><br/>
+<b><a href="thesis/thesis_presentation.ppt" target="_blank">Presentation</a></b><br/>
+<br />
+<h2>
+Abstract
+</h2>
+<p>Visibility enhancement in bad weather is important in many applications, including in decreasing road accidents. Current single image visibility enhancement or specifically fog removal methods are capable of increasing the visibility of a fog plagued image. In this master thesis project we attempt to improve a single image method by using tracking information obtained from a video using SIFT flow.</p>
+<p>Before starting on enhancing visibility in video we analyse and compare two often cited papers in the field of single image visibility enhancement in bad weather. From the comparison of the two methods we conclude that Tan’s method works best for foggy images and Tarel et al.’s method is better at images containing haze.</p>
+<p>Our method of choice for visibility enhancement in video is Tarel et al.’s method, this choice is based on the analysis of the single image methods. The method is fast and should benefit more from additional data obtained from video as it has difficulties with correctly estimating the atmospheric veil for white objects. The atmospheric veil is based on the whiteness of the image, where the whiter an object is the further it is estimated to be. Using the tracking data from SIFT flow we try to detect wrongly estimated objects and correct the atmospheric veil for these objects. We focus on finding white objects that are close to the observer.</p>
+
+<img src="thesis/before.png" width="960" height="540"/>
+<img src="thesis/after.png" width="960" height="540" />

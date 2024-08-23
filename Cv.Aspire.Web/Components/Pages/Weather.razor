@@ -1,0 +1,52 @@
+﻿@page "/weather"
+@rendermode @(new InteractiveServerRenderMode(prerender: false))
+@using Cv.Aspire.Web.Code.Clients.Api
+@using Cv.Aspire.Web.Code.Clients.Api.Models
+
+<PageTitle>Weather</PageTitle>
+
+<h1>Weather</h1>
+
+<p>This component demonstrates showing data loaded from a backend API service.</p>
+
+
+<div class="row g-3">
+  <div class="col-auto">
+    <label for="inputPassword2" class="visually-hidden">Password</label>
+        <InputText class="form-control" placeholder="Location" @bind-Value="locationQuery" @onkeyup="OnKeyUp_Search"/>
+  </div>
+  <div class="col-auto">
+    <button class="btn btn-primary mb-3" @onclick="Submit">Submit</button>
+  </div>
+</div>
+
+
+@if (isLoading)
+{
+    <p><em>Loading...</em></p>
+}
+else if (forecast is null)
+{
+    <p><em>No results for '@locationQuery'</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Location</th>
+                <th>Temperature</th>
+                <th>Rain</th>
+                <th>Weather</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@forecast.Location.Name</td>
+                <td>@(forecast.WeatherForecast.Current.Temperature2m)@(forecast.WeatherForecast.CurrentUnits.Temperature2m)</td>
+                <td>@(forecast.WeatherForecast.Current.Rain)@(forecast.WeatherForecast.CurrentUnits.Rain)</td>
+                <td>@ConvertWmoCode(forecast.WeatherForecast.Current.WeatherCode)</td>
+            </tr>
+        </tbody>
+    </table>
+}

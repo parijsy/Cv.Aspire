@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentResults.Extensions.AspNetCore" Version="0.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Cv.Aspire.ApiService.Domain\Cv.Aspire.ApiService.Domain.csproj" />
+    <ProjectReference Include="..\Cv.Aspire.ServiceDefaults\Cv.Aspire.ServiceDefaults.csproj" />
+  </ItemGroup>
+
+</Project>
