@@ -3,7 +3,7 @@ using Cv.Aspire.Web.Code.Clients.Api.Models;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 
-namespace Cv.Aspire.Web.Components.Pages
+namespace Cv.Aspire.Web.Components.Pages.Code_Examples
 {
     public partial class Weather
     {
