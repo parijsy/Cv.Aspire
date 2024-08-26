@@ -5,23 +5,32 @@ using Microsoft.AspNetCore.Components.Web;
 
 namespace Cv.Aspire.Web.Components.Pages.Code_Examples
 {
-    public partial class Weather
+    public partial class Weather : IDisposable
     {
         [Inject] private ApiClient ApiClient { get; set; } = null!;
         [Inject] private ILogger<Weather> Logger { get; set; } = null!;
 
         private string locationQuery = "Amsterdam";
         private CurrentWeatherForecast? forecast;
-        private bool isLoading = true;
+        private bool isLoading = false;
+
+        private CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
 
         protected override async Task OnInitializedAsync() =>
             await Submit();
 
         private async Task Submit()
         {
-            isLoading = true;
-            forecast = await ApiClient.GetCurrentWeatherForLocationAsync(locationQuery);
-            isLoading = false;
+            cancellationTokenSource.Cancel();
+            cancellationTokenSource = new CancellationTokenSource();
+
+            try
+            {
+                isLoading = true;
+                forecast = await ApiClient.GetCurrentWeatherForLocationAsync(locationQuery, cancellationTokenSource.Token);
+                isLoading = false;
+            }
+            catch (TaskCanceledException) { }
         }
 
         private async Task OnKeyUp_Search(KeyboardEventArgs e)
@@ -61,5 +70,12 @@ namespace Cv.Aspire.Web.Components.Pages.Code_Examples
             99 => "Thunderstorm with hail",
             _ => string.Empty,
         };
+
+        public void Dispose()
+        {
+            GC.SuppressFinalize(this);
+            cancellationTokenSource.Cancel();
+            cancellationTokenSource.Dispose();
+        }
     }
 }
