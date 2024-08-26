@@ -14,7 +14,7 @@ public class ServiceRegistrationBundle : IServiceRegistrationBundle
     public void Register(IServiceCollection services, IConfiguration configuration)
     {
         services.AddTransient<IWeatherService, WeatherService>();
-        services.AddHttpClient<IGeocodingClient, GeocodingClient>().WithBaseAddress(configuration.GetValue<Uri>("BaseAddress:GeoCoding"));
-        services.AddHttpClient<IWeatherForecastClient, WeatherForecastClient>().WithBaseAddress(configuration.GetValue<Uri>("BaseAddress:WeatherForecast"));
+        services.AddHttpClient<IGeocodingClient, GeocodingClient>().WithBaseAddress(configuration, "BaseAddress:GeoCoding");
+        services.AddHttpClient<IWeatherForecastClient, WeatherForecastClient>().WithBaseAddress(configuration, "BaseAddress:WeatherForecast");
     }
 }
