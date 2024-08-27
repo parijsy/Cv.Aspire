@@ -5,7 +5,123 @@
 
 <PageTitle>Weather</PageTitle>
 
-<h1>Weather</h1>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h1>Weather</h1>
+            <p>This component demonstrates showing data loaded from a backend API service.</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-auto">
+            <label for="inputPassword2" class="visually-hidden">Password</label>
+            <InputText class="form-control" placeholder="Location" @bind-Value="locationQuery" @onkeyup="OnKeyUp_Search"/>
+        </div>
+        <div class="col-auto">
+            <button class="btn btn-primary mb-3" @onclick="Submit">Submit</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            @if (isLoading)
+            {
+                <p><em>Loading...</em></p>
+            }
+            else if (forecast is null)
+            {
+                <p><em>No results for '@locationQuery'</em></p>
+            }
+            else
+            {
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Location</th>
+                            <th>Temperature</th>
+                            <th>Rain</th>
+                            <th>Weather</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>@forecast.Location.Name</td>
+                            <td>@(forecast.WeatherForecast.Current.Temperature2m)@(forecast.WeatherForecast.CurrentUnits.Temperature2m)</td>
+                            <td>@(forecast.WeatherForecast.Current.Rain)@(forecast.WeatherForecast.CurrentUnits.Rain)</td>
+                            <td>@ConvertWmoCode(forecast.WeatherForecast.Current.WeatherCode)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            }
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <h2>Uitleg</h2>
+            De weersvoorspelling wordt met één endpoint opgehaald die is gedefinieerd in de WeatherController. Met behulp van de Route attributen wordt het pad vast gelegd. 
+
+            Service
+            <script src="https://emgithub.com/embed-v2.js?target=https%3A%2F%2Fgithub.com%2Fparijsy%2FCv.Aspire%2Fblob%2Fmaster%2FCv.Aspire.ApiService.Domain%2FWeather%2FWeatherService.cs&style=default&type=code&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
+
+            Geocoding client
+            <script src="https://emgithub.com/embed-v2.js?target=https%3A%2F%2Fgithub.com%2Fparijsy%2FCv.Aspire%2Fblob%2Fmaster%2FCv.Aspire.ApiService.Domain%2FWeather%2FClients%2FGeocoding%2FGeocodingClient.cs&style=default&type=code&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
+
+            Weather Client
+            <script src="https://emgithub.com/embed-v2.js?target=https%3A%2F%2Fgithub.com%2Fparijsy%2FCv.Aspire%2Fblob%2Fmaster%2FCv.Aspire.ApiService.Domain%2FWeather%2FClients%2FWeatherForecast%2FWeatherForecastClient.cs&style=default&type=code&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
+
+            Controller
+            <script src="https://emgithub.com/embed-v2.js?target=https%3A%2F%2Fgithub.com%2Fparijsy%2FCv.Aspire%2Fblob%2Fmaster%2FCv.Aspire.ApiService%2FControllers%2FWeatherController.cs&style=default&type=code&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
+        </div>
+    </div>
+        <div class="row">
+        <div class="col">
+            <h2>Dependency Injection registraties</h2>
+            <p>
+                Bij het opstellen van de dependency injection container moet je alle dependencies registreren. Dit kun je direct in de <code>Program.cs</code> doen met het gevolg dat dit bestand even snel groeit als het aantal dependencies die je in je applicatie hebt.
+                Het registreren van de dependencies wordt daarom regelmatig verplaatst naar een eigen bestand dat tijdens het bouwen van de container wordt aangeroepen.
+                Als alle registraties naar één enkel bestand worden verplaatst dan krijgt dat bestand heel veel usings, of de namespaces worden tijdens de registratie uitgeschreven om conflicten te voorkomen.
+                Een vervolg stap is om de registraties te versplinteren naar meerdere kleine bestanden, het gevolg daarvan is dat je die kleinere registratie bestanden moet aanroepen bij het aanmaken van de dependency injection container. 
+                Met behulp van reflection is het mogelijk om ervoor te zorgen dat die kleine registratie bestanden tijdens het bouwen van de dependency injection container worden gevonden en uitgevoerd.
+            </p>
+            <p>
+                Om ervoor te zorgen dat we met reflection de registratie bestanden kunnen vinden introduceren we een interface.
+                De interface die we introduceren kunnen we <code>IServiceRegistrationBundle</code> noemen, het is namelijk een bundel van service registraties.
+                Met de introductie van een interface kunnen we de registratie bundels vinden, maar als we de bundels willen gebruiken is het handig om op de interface één of meerdere signatures definiëren.
+                Een voor de hand liggende naam voor de signature is <code>Register</code> en om ervoor te zorgen dat de <code>IServiceCollection</code> aangepast kan worden willen we een <code>IServiceCollection</code> parameter aan de signature toevoegen.
+                Met de signature <code>public void Register(IServiceCollection services)</code> kunnen we al veel registraties uitvoeren.
+                Om registraties die de configuratie van de applicatie gebruiken mogelijk te maken kunnen we een extra signature toevoegen die als extra parameter een <code>IConfiguration</code> object ontvangt, uiteraard is het ook mogelijk om er voor te kiezen om maar één signature te hebben door de signature zonder <code>IConfiguration</code> te laten vervallen.
+            </p>
+            <p>
+                Dit is de <code>IServiceRegistrationBundle</code> die in dit project wordt gebruikt.
+                <script src="https://emgithub.com/embed-v2.js?target=https%3A%2F%2Fgithub.com%2Fparijsy%2FCv.Aspire%2Fblob%2Fmaster%2FCv.Aspire.ApiService.Infrastructure%2FConfiguration%2FIServiceRegistrationBundle.cs&style=default&type=code&showBorder=on&showLineNumbers=on&showFileMeta=on&showFullPath=on&showCopy=on"></script>
+            </p>
+            <p>
+                De interface wordt in dit project op deze manier gebruikt:
+                <script src="https://emgithub.com/embed-v2.js?target=https%3A%2F%2Fgithub.com%2Fparijsy%2FCv.Aspire%2Fblob%2Fmaster%2FCv.Aspire.ApiService.Domain%2FWeather%2FServiceRegistrationBundle.cs&style=default&type=code&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
+            </p>
+            <p>
+                In dit voorbeeld worden er twee opmerkelijke registraties gedaan. De <code>AddHttpClient</code> registraties maken geen gebruik van de overload waarbij het <code>BaseAddress</code> van de httpclient wordt ingesteld.
+                De <code>BaseAddress</code> wordt via de custom <code>WithBaseAddress</code> extension-method ingesteld waardoor de registratie net wat beknopter wordt.
+                De definitie van deze extension-method ziet er als volgt uit:
+                <script src="https://emgithub.com/embed-v2.js?target=https%3A%2F%2Fgithub.com%2Fparijsy%2FCv.Aspire%2Fblob%2Fmaster%2FCv.Aspire.ApiService.Infrastructure%2FConfiguration%2FHttpClientBuilderExtensions.cs&style=default&type=code&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
+            </p>
+            <p>
+                We gaan ons nu richten op het reflection stuk dat ervoor zorgt dat de bundels gevonden en uitgevoerd worden.
+                Wat we niet willen is een lap code met reflection bij het aanmaken van de dependency injection container, daarom maken we een extension-method voor <code>IServiceCollection</code>.
+                Het enige wat deze extension-method hoeft te doen is alle implementaties van de interface te vinden, en vervolgens de <code>Register</code> methode aan te roepen.
+                <script src="https://emgithub.com/embed-v2.js?target=https%3A%2F%2Fgithub.com%2Fparijsy%2FCv.Aspire%2Fblob%2Fmaster%2FCv.Aspire.ApiService.Infrastructure%2FConfiguration%2FServiceCollectionExtensions.cs&style=default&type=code&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
+            </p>
+            <p>
+                In dit project wordt de dependency injection container opgebouwd in het <code>Program.cs</code> bestand.
+                Als we dit bestand bekijken dan zien we dat de <code>RegisterBundlesInAssembly</code> extension-method wordt gebruikt om alle bestanden binnen de assembly van de Domain project laag te registreren.
+                <script src="https://emgithub.com/embed-v2.js?target=https%3A%2F%2Fgithub.com%2Fparijsy%2FCv.Aspire%2Fblob%2Fmaster%2FCv.Aspire.ApiService%2FProgram.cs&style=default&type=code&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
+            </p>
+        </div>
+    </div>
+</div>
+
+
+
+@* <h1>Weather</h1>
 
 <p>This component demonstrates showing data loaded from a backend API service.</p>
 
@@ -18,10 +134,10 @@
   <div class="col-auto">
     <button class="btn btn-primary mb-3" @onclick="Submit">Submit</button>
   </div>
-</div>
+</div> *@
 
 
-@if (isLoading)
+@* @if (isLoading)
 {
     <p><em>Loading...</em></p>
 }
@@ -49,10 +165,10 @@ else
             </tr>
         </tbody>
     </table>
-}
+} *@
 
 
-<h2>Uitleg</h2>
+@* <h2>Uitleg</h2>
 De weersvoorspelling wordt met één endpoint opgehaald die is gedefinieerd in de WeatherController. Met behulp van de Route attributen wordt het pad vast gelegd. 
 
 Service
@@ -66,9 +182,9 @@ Weather Client
 
 Controller
 <script src="https://emgithub.com/embed-v2.js?target=https%3A%2F%2Fgithub.com%2Fparijsy%2FCv.Aspire%2Fblob%2Fmaster%2FCv.Aspire.ApiService%2FControllers%2FWeatherController.cs&style=default&type=code&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
+ *@
 
-
-<h2>Dependency Injection registraties</h2>
+@* <h2>Dependency Injection registraties</h2>
 <p>
     Bij het opstellen van de dependency injection container moet je alle dependencies registreren. Dit kun je direct in de <code>Program.cs</code> doen met het gevolg dat dit bestand even snel groeit als het aantal dependencies die je in je applicatie hebt.
     Het registreren van de dependencies wordt daarom regelmatig verplaatst naar een eigen bestand dat tijdens het bouwen van de container wordt aangeroepen.
@@ -108,4 +224,4 @@ Controller
     In dit project wordt de dependency injection container opgebouwd in het <code>Program.cs</code> bestand.
     Als we dit bestand bekijken dan zien we dat de <code>RegisterBundlesInAssembly</code> extension-method wordt gebruikt om alle bestanden binnen de assembly van de Domain project laag te registreren.
     <script src="https://emgithub.com/embed-v2.js?target=https%3A%2F%2Fgithub.com%2Fparijsy%2FCv.Aspire%2Fblob%2Fmaster%2FCv.Aspire.ApiService%2FProgram.cs&style=default&type=code&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script>
-</p>
+</p> *@
