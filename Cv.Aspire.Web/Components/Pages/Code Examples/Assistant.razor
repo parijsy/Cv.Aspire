@@ -38,11 +38,25 @@
 
     <div class="row">
         <div class="col">
-        @foreach (var message in chat.Where(x => x.Role == AuthorRole.Assistant || x.Role == AuthorRole.User))
+        @foreach (var message in messages)
         {
             <div class="card mb-3 @(message.Role == AuthorRole.Assistant ? "text-bg-light" : "")">
                 <div class="card-header">@message.Role.ToString()</div>
-                <div class="card-body">@message.Content</div>
+                <div class="card-body">
+                    @message.Message
+                    @if (message.IsStreaming)
+                    {
+                        <div class="spinner-grow" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    }
+                    </div>
+            </div>
+        }
+        @if (showAssistantAlert)
+        {
+            <div class="alert alert-danger" role="alert">
+                Er is iets fout gegaan bij de communicatie met de assistent.
             </div>
         }
         </div>
