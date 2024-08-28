@@ -54,6 +54,12 @@ public partial class Assistant
         }
     }
 
+    private async Task SubmitQuestion(string question)
+    {
+        prompt = question;
+        await Submit();
+    }
+
     private void HandleSubmitException()
     {
         timer.Stop();
