@@ -25,7 +25,11 @@ public static class Extensions
         builder.Services.ConfigureHttpClientDefaults(http =>
         {
             // Turn on resilience by default
-            http.AddStandardResilienceHandler();
+            http.AddStandardResilienceHandler((x) =>
+            {
+                // Timeout verhoogd naar 120s ivm function calling van de assistent
+                x.TotalRequestTimeout.Timeout = TimeSpan.FromSeconds(120);
+            });
 
             // Turn on service discovery by default
             http.AddServiceDiscovery();

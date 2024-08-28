@@ -1,5 +1,9 @@
+using Azure.Core.Diagnostics;
+using Azure.Identity;
 using Cv.Aspire.Web.Code.Clients.Api;
+using Cv.Aspire.Web.Code.SemanticKernel.Plugins;
 using Cv.Aspire.Web.Components;
+using Microsoft.SemanticKernel;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +13,24 @@ builder.AddServiceDefaults();
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+
+var kernel = builder.Services.AddKernel();
+kernel.Plugins.AddFromType<TimePlugin>();
+kernel.Plugins.AddFromType<WeatherPlugin>();
+builder.Services.AddScoped(sp => KernelPluginFactory.CreateFromType<ThemePlugin>(serviceProvider: sp));
+
+using AzureEventSourceListener listener = AzureEventSourceListener.CreateConsoleLogger();
+
+var credentials = new DefaultAzureCredential(new DefaultAzureCredentialOptions
+{
+    ExcludeVisualStudioCredential = true
+});
+
+builder.Services.AddAzureOpenAIChatCompletion(
+    builder.Configuration.GetValue<string>("AzureOpenAI:ChatDeploymentName")!,
+    builder.Configuration.GetValue<string>("AzureOpenAI:Endpoint")!,
+    credentials);
+
 
 builder.Services.AddOutputCache();
 

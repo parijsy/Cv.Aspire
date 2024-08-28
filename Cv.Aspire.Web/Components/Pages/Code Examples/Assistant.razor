@@ -1,0 +1,60 @@
+﻿@page "/assistant"
+@rendermode InteractiveServer
+@using Microsoft.SemanticKernel.ChatCompletion;
+
+<PageTitle>Assistant</PageTitle>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h1>Assistant</h1>
+            <div class="alert alert-warning" role="alert">
+               Wanneer er gebruik wordt gemaakt van function calling kan de assistent er lang over doen. 
+               De timeout is om deze reden verhoogd naar 2 minuten.
+            </div>
+            <p>
+                Dit is een voorbeeld van een eenvoudige chat applicatie die gebruik maakt van gpt-4o.
+                Het zware werk wordt door <code>Semantic Kernel</code> gedaan, en omdat dit project met server-side blazor is gemaakt kan Semantic Kernel direct in de applicatie worden gebruikt.
+                Het voordeel hiervan is dat er geen eigen API hoeft te zijn die de prompts doorzet en voor streaming responses hoeft er geen SignalR service opgetuigd te worden.
+                Een nadeel is wel dat de chat applicatie nu gebonden is aan de front-end applicatie en niet herbruikbaar of eenvoudig te verplaatsen is naar een andere front-end applicatie.
+            </p>
+            <p>
+                Bij het opzetten van deze demo ben ik in eerste instantie begonnen met de semantic kernel te plaatsen in de eigen API in plaats van direct in de front-end.
+                Het plan was om met <code>Native Functions</code> de staat van wat HTML elementen aan te passen.
+                In mijn YouTube feed kwam toevallig de video <a href="https://www.youtube.com/watch?v=z7V-_JVF_Zo" target="_blank">Build interactive AI-powered web apps with Blazor and .NET</a> van dotnet voorbij.
+                Vanwege de eenvoud waarmee je de semantic kernel direct in een blazor server-side applicatie kan gebruiken ben ik n.a.v. deze video overstag gegaan en heb dat voorbeeld gevolgd.
+                Zelfs het voorbeeld waarbij het thema van de sidebar kan worden aangepast is overgenomen.
+            </p>
+            <p>
+                In dit voorbeeld zijn naast de <code>ThemePlugin</code> uit het voorbeeld van de YouTube video ook de <code>TimePlugin</code> en <code>WeatherPlugin</code> toegevoegd.
+                De TimePlugin maakt het mogelijk om de huidige tijd op te vragen, en de WeatherPlugin maakt gebruik van de weerbericht functionaliteit waardoor je de assistant naar het huidige weer kan vragen voor een bepaalde plaats.
+                Het aanroepen van methodes in de plugins wordt <code>function calling</code> genoemd.
+            </p>
+        </div>
+    </div>
+
+    <div style="margin:0; padding:0; height:100px;"></div>
+
+    <div class="row">
+        <div class="col">
+        @foreach (var message in chat.Where(x => x.Role == AuthorRole.Assistant || x.Role == AuthorRole.User))
+        {
+            <div class="card mb-3 @(message.Role == AuthorRole.Assistant ? "text-bg-light" : "")">
+                <div class="card-header">@message.Role.ToString()</div>
+                <div class="card-body">@message.Content</div>
+            </div>
+        }
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="mb-3">
+            <InputTextArea class="form-control" placeholder="Stel een vraag" @bind-Value="prompt" rows="3" />
+        </div>
+        <div class="mb-3">
+            <button class="btn btn-primary mb-3" @onclick="Submit">Verzend</button>
+        </div>
+    </div>
+
+</div>
