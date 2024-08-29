@@ -172,10 +172,15 @@
                 <li>[2] Gameplay beelden zelf gemaakt spel: <a href="https://www.youtube.com/watch?v=MWa4WFF4ca4&ab_channel=YuriParijs" target="_blank">https://www.youtube.com/watch?v=MWa4WFF4ca4&ab_channel=YuriParijs</a></li>
             </ul>
         </div>
+    </div>    
+    <div class="row">
+        <div class="col">
+            <h4>QR code naar portfolio</h4>
+            <img src="cv/qr_link.png" class="rounded" width="300" />
+        </div>
     </div>
 </div>
 
 @code {
     private RenderFragment<(string skill, int colSize)> RenderSkill = x => @<div class="col col-@x.colSize">@x.skill</div>;
-
 }
