@@ -83,51 +83,99 @@
         </div>
     </div>
     <div class="row">
-        <div class="col">
+        <div class="col-12">
             <h2>Skills</h2>
-            Prompt Engineering   •   Large Language Models (LLM)   •   Semantic Kernel   •   Jira   •   Windows Communication Foundation (WCF)   •   Microsoft Azure   •   DevOps   •   Azure DevOps Server   •   API Development   •   Blazor
+        </div>
+        @RenderSkill(("Prompt Engineering", 2))
+        @RenderSkill(("Large Language Models (LLM)", 3))
+        @RenderSkill(("Semantic Kernel", 2))
+        @RenderSkill(("Jira", 1))
+        @RenderSkill(("Windows Communication Foundation (WCF)", 4))
+        @RenderSkill(("Microsoft Azure", 2))
+        @RenderSkill(("DevOps", 1))
+        @RenderSkill(("Azure DevOps Server", 2))
+        @RenderSkill(("API Development", 2))
+        @RenderSkill(("Blazor", 1))
+        @RenderSkill(("Azure SignalR", 2))
+        @RenderSkill(("C#", 1))
+        @RenderSkill(("Javscript", 1))
+    </div>
+    <div class="row">
+        <div class="col">
+            <h2>Over</h2>
+            <p>
+                Door de combinatie van een HBO informatica opleiding en daarna een Universitaire computerwetenschappen opleiding heb ik een interessante combinatie van praktijk en theorie kennis opgebouwd. 
+                Deze kennis is de afgelopen 12 jaar gegroeid vanuit de rol als C# software-ontwikkelaar bij twee bedrijven.
+            </p>
+            <p>
+                Bij Dazzleware heb ik mijn eerste echte introductie met C# gekregen.
+                Door samen met andere ontwikkelaars aan meerdere projecten te werken heb ik mij daar kunnen ontwikkelen in mijn C# kennis, maar ook in javascript, css, en HTML.
+                Naast code schrijven heb ik bij Dazzleware ook, in mindere mate, contact gehad met klanten voor het uitwerken van nieuwe functionaliteiten.
+            </p>
+            <p>
+                Met 4 jaar ervaring als C# software-ontwikkelaar ben ik aan de slag gegaan bij Van Spaendonck.
+                Hier heb ik in het begin vooral gewerkt als full-stack ontwikkelaar.
+                Bij de overstap naar een applicatie met een API heb ik de overstap gemaakt om te focussen op alleen back-end werk.
+            </p>
+            <p>
+                Mijn ideale werkomgeving is een omgeving waarin ik als ontwikkelaar wordt uitgedaagd en mij kan verdiepen in nieuwe technieken.
+                Ik ben altijd op zoek naar best-practices en kan plezier halen uit het maken van code die uiteraard doet wat het moet doen, maar daarnaast ook duidelijk te begrijpen is, compact, netjes, en goed onderhoudbaar is.
+                Als ontwikkelaar werk je vaak niet alleen aan een project, ik vind het daarom belangrijk dat code snel te doorgronden moet zijn voor collega's.
+                Om deze reden spar ik graag over ideeën. 
+                Nieuwe features kunnen op meerdere manieren uitgewerkt worden, elke uitwerking met zijn eigen voor- en nadelen. 
+                In dat soort momenten betrek ik graag een collega om de opties te bespreken om zodoende tot de beste keuze te komen, tijdens die momenten sta ik altijd open voor opties die zij aandragen.
+                Wanneer ik in contact kom met nieuwe technieken dan bedenk ik graag hoe deze techniek toegepast kan worden in een huidige code-base, maar ook hoe het gecombineerd kan worden met iets anders.
+                Momenteel vind ik het daarom ook leuk om mij te verdiepen in de AI functionaliteiten van Azure.
+            </p>
         </div>
     </div>
     <div class="row">
         <div class="col">
             <h2>Projecten</h2>
             <h3>van Spaendonck</h3>
-
             <p>
                 De basis opzetten van de nieuwe versie van Loket.nl, denk hierbij aan het ontwerpen van de eerste services die worden aangeroepen door de destijds nieuwe API laag. Naast de inhoudelijke structuur van deze services, die als voorbeeld dienen voor alle latere services die zijn gemaakt, is er destijds ook aandacht besteed aan het eenvoudig aanroepen van deze services en hoe de services middels unit tests getest kunnen worden. Bij de communicatie tussen de API en de services is ervoor gekozen om deze strongly-typed en loosely-coupled te maken, dit hebben we weten te bereiken door o.a. de publieke modellen van een service beschikbaar te maken via een NuGet package. Het voordeel hiervan is dat je de modellen eenmalig definieert en je via de NuGet package manager inziet of je modellen achterlopen.
                 Een ander belangrijk onderdeel waar aandacht aan was besteed was schaalbaarheid, de oude monoliete applicatie was in enkele gevallen stateful. Het was een bewuste keuze om de services stateless te maken met het oog op de toekomst waar we uiteindelijk onze services in Azure wilden gaan hosten en de mogelijkheid hebben om gebruik te maken van scaling.
                 Ondertussen zijn deze services al ver doorontwikkeld en is het de basis van nieuwe services, en onze nieuwere microservices zijn geïnspireerd op deze services. Ook wordt alles gehost in Azure en wordt (bijna) alles via containers gedeployed.
             </p>
-
             <p>
-                De API van loket ondersteund bij de meeste endpoints die lijsten teruggeeft de mogelijkheid om te filteren en te sorteren. Voor de filter was er gekozen om de operators te ondersteunen die Microsoft adviseert bij de Microsoft Azure REST API Guidelines (https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#filter-operators). Om dit te ondersteunen heb ik een interpreter gemaakt die de filtertekst omzet naar een Abstract Syntax Tree (AST), het resultaat van de AST wordt vervolgens gebruikt om een Linq expressie te maken via Expression Trees. Voordat ik hieraan begon was ik onbekend met interpreters, maar met behulp van een blog met voorbeelden in VbScript waarbij een rekenmachine werd gemaakt heb ik in C# een interpreter kunnen maken voor de filter.
+                De API van loket ondersteund bij de meeste endpoints die lijsten teruggeeft de mogelijkheid om te filteren en te sorteren. Voor de filter was er gekozen om de operators te ondersteunen die Microsoft adviseert bij de <a href="https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#filter-operators" target="_blank">Microsoft Azure REST API Guidelines</a><sup>[1]</sup>. Om dit te ondersteunen heb ik een interpreter gemaakt die de filtertekst omzet naar een Abstract Syntax Tree (AST), het resultaat van de AST wordt vervolgens gebruikt om een Linq expressie te maken via Expression Trees. Voordat ik hieraan begon was ik onbekend met interpreters, maar met behulp van een blog met voorbeelden in VbScript waarbij een rekenmachine werd gemaakt heb ik in C# een interpreter kunnen maken voor de filter.
             </p>
-
             <p>
                 Een project dat ik samen met een collega heb gestart en ondertussen breder wordt gedragen is een management portal. Onze eerdere management portal was gemaakt door een externe ontwikkelaar en werd gebruikt om de autorisatie in te richten. De management portal had af en toe wat problemen die helaas te veel tijd kostten om op te lossen aangezien de applicatie op een afwijkende manier was opgezet. Mijn collega en ik hebben daarom een grote aanzet gemaakt om aan te tonen dat de management portal op een soortgelijke manier kan worden opgezet zoals al onze andere applicaties. Wij hebben er voor gekozen om er een micro-service backend voor te maken samen met een front-end gemaakt in Blazor.
                 Ondertussen wordt onze variant van de management portal gebruikt en is deze qua inhoud zelfs uitgebreid met functionaliteit die niet te maken heeft met het inrichten van autorisaties.
             </p>
-
             <p>
                 Om tot een stabiele en robuuste applicatie te komen is het belangrijk om de applicaties in de gaten te houden terwijl deze op productie draaien. Het is daarom interessant om de logging in te zien van fouten die optreden op productie. Met deze gedachten heb ik een tool gemaakt (voordat we Application Insights gebruikten) die de logging via SEQ opvraagt en groepeert. Hiermee konden we een overzicht genereren die aangaf welke fout het meeste voorkomt en hier aandacht aan besteed om op te lossen. Met deze pro-actieve instelling hebben we meerdere bugs opgelost, soms voordat klanten erover klaagden, andere keren voordat de klacht bij ons was aangekomen.
                 Een vervolgproject dat helaas nog niet verder is opgepakt is de Application Insights variant. Application Insights biedt standaard al overzichten van de meest voorkomende fouten per tijdsperiode, maar wij hadden nog geen mogelijkheid gezien om een historie aan te kunnen maken met het idee om de overzichten van eerder periodes te vergelijken en om (JIRA) issues, of opmerkingen te kunnen koppelen aan de logmeldingen.
             </p>
-
             <p>
                 Het meest recente project waar ik aan heb gewerkt is het opzetten van een AI assistent. Deze chatassistent kan met behulp van Semantic Kernel endpoints van onze API's aanroepen. We hebben ervoor gekozen om de mogelijkheden die de assistent heeft te beperken op basis van de rechten die de gebruiker heeft. Het aanroepen van eigen code (of endpoints) gaat via Plugins die geregistreerd moeten zijn bij de kernel. De eigen code die je aanroept worden Native Functions genoemd en deze functies kunnen via een attribuut een beschrijving krijgen van de methode en de argumenten en return waardes. Al deze beschrijvingen worden naar de LLM gestuurd zodat de LLM weet of het een native function moet aanroepen. Hoe meer native functions er zijn, des te meer de LLM moet overwegen om wel of niet aan te roepen. Daarom de keuze om plugins klein te houden en alleen te registreren indien nodig.
                 Mijn verwachting is dat in de toekomst de assistent opgesplitst zal worden in meerdere assistenten met iedere een eigen duidelijke rol, maar tot die tijd registreren wij de plugins op basis van autorisatie.
             </p>
-
             <h3>Vrije tijd</h3>
             <p>
                 In mijn vrije tijd heb ik twee kleine spellen gemaakt met Unity en deze beschikbaar gemaakt in de Google Playstore. Ondertussen is mijn developer account verlopen en zijn de spellen niet meer beschikbaar om te downloaden, maar ze staan nog wel op mijn smartphone.
                 Bij het eerste spel bewoog je automatisch over een pad en moet je ballonen zien te raken. De besturing van dit spel verloopt geheel via de gyroscope van je smart device, als je naar links wilt kijken zul je zelf ook naar links moeten draaien.
-                Voor beelden van dit spel zie: https://www.youtube.com/watch?v=MWa4WFF4ca4&ab_channel=YuriParijs
+                Gameplay beelden zijn te zien in <a href="https://www.youtube.com/watch?v=MWa4WFF4ca4&ab_channel=YuriParijs" target="_blank">deze video</a><sup>[2]</sup>.
             </p>
-
             <p>
                 Daarnaast heb ik een ander spel gemaakt dat nooit beschikbaar is gemaakt in de Google Playstore. Het gaat om een puzzelspel gebaseerd op Yahtzee dat gebruik maakt van Azure PlayFab en Photon engine om online multiplayer en matchmaking mogelijk te maken.
             </p>
         </div>
     </div>
+    <div class="row">
+        <div class="col">
+            <h2>Links</h2>
+            <ul>
+                <li>[1] Microsoft Azure REST API Guidelines: <a href="https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#filter-operators" target="_blank">https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#filter-operators</a></li>
+                <li>[2] Gameplay beelden zelf gemaakt spel: <a href="https://www.youtube.com/watch?v=MWa4WFF4ca4&ab_channel=YuriParijs" target="_blank">https://www.youtube.com/watch?v=MWa4WFF4ca4&ab_channel=YuriParijs</a></li>
+            </ul>
+        </div>
+    </div>
 </div>
+
+@code {
+    private RenderFragment<(string skill, int colSize)> RenderSkill = x => @<div class="col col-@x.colSize">@x.skill</div>;
+
+}

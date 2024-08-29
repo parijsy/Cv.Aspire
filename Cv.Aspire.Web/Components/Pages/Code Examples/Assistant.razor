@@ -74,27 +74,45 @@
     <div class="row">
         <div class="col col-4">
             <h2>Voorbeeld vragen</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col col-4">
             <div class="input-group mb-3">
                 <input type="text" class="form-control" value="Welke acties kun je voor mij uitvoeren?" disabled>
                 <button class="btn btn-outline-secondary" type="button" @onclick="@(e => SubmitQuestion("Welke acties kun je voor mij uitvoeren?"))">
                     @RenderQuestionIcon
                 </button>
             </div>
+        </div>
+        <div class="col col-4">
             <div class="input-group mb-3">
                 <input type="text" class="form-control" value="Hoe is het weer nu in Amsterdam?" disabled>
                 <button class="btn btn-outline-secondary" type="button" @onclick="@(e => SubmitQuestion("Hoe is het weer nu in Amsterdam?"))">
                     @RenderQuestionIcon
                 </button>
             </div>
+        </div>
+        <div class="col col-4">
             <div class="input-group mb-3">
                 <input type="text" class="form-control" value="Hoe laat is het nu?" disabled>
                 <button class="btn btn-outline-secondary" type="button" @onclick="@(e => SubmitQuestion("Hoe laat is het nu?"))">
                     @RenderQuestionIcon
                 </button>
             </div>
+        </div>
+        <div class="col col-4">
             <div class="input-group mb-3">
                 <input type="text" class="form-control" value="Pas de thema kleuren aan naar paars en groen" disabled>
                 <button class="btn btn-outline-secondary" type="button" @onclick="@(e => SubmitQuestion("Pas de thema kleuren aan naar paars en groen"))">
+                    @RenderQuestionIcon
+                </button>
+            </div>
+        </div>
+        <div class="col col-8">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" value="Pas de thema kleuren aan naar zomerse kleuren, en leg uit waarom je deze kleuren hebt gekozen" disabled>
+                <button class="btn btn-outline-secondary" type="button" @onclick="@(e => SubmitQuestion("Pas de thema kleuren aan naar zomerse kleuren, en leg uit waarom je deze kleuren hebt gekozen"))">
                     @RenderQuestionIcon
                 </button>
             </div>
