@@ -77,3 +77,8 @@ h1:focus {
     height: 100%;
     border: 0;
 }
+
+
+div.nopmargin p {
+    margin-bottom: 0px;
+}

@@ -1,5 +1,6 @@
 ﻿@page "/assistant"
 @rendermode InteractiveServer
+@using Markdig;
 @using Microsoft.SemanticKernel.ChatCompletion;
 
 <PageTitle>Assistant</PageTitle>
@@ -34,7 +35,7 @@
         </div>
     </div>
 
-    <div style="margin:0; padding:0; height:100px;"></div>
+    <hr class="border-2 opacity-75 mt-0" />
 
     <div class="row">
         <div class="col">
@@ -42,8 +43,8 @@
         {
             <div class="card mb-3 @(message.Role == AuthorRole.Assistant ? "text-bg-light" : "")">
                 <div class="card-header">@message.Role.ToString()</div>
-                <div class="card-body">
-                    @message.Message
+                <div class="card-body nopmargin">
+                    @((MarkupString)Markdown.ToHtml(message.Message))
                     @if (message.IsStreaming)
                     {
                         <div class="spinner-grow" role="status">
