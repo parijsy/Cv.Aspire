@@ -1,0 +1,29 @@
+﻿using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
+
+namespace Cv.Aspire.Web.Components.Layout.Custom;
+
+// Based on https://stackoverflow.com/a/70749777
+public class GithubGistSnippetBase : ComponentBase, IAsyncDisposable
+{
+    [Inject] private IJSRuntime JSRuntime { get; set; } = default!;
+
+    [Parameter, EditorRequired] public string Title { get; set; } = default!;
+    [Parameter, EditorRequired] public string UserId { get; set; } = default!;
+    [Parameter, EditorRequired] public string FileName { get; set; } = default!;
+
+    private IJSObjectReference? module;
+    protected string Id = Guid.NewGuid().ToString();
+
+    protected override async Task OnInitializedAsync()
+    {
+        module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/githubgist.js");
+        await module.InvokeVoidAsync("printSnippetFrom", Id, UserId, FileName);
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (module is not null)
+            await module.DisposeAsync();
+    }
+}

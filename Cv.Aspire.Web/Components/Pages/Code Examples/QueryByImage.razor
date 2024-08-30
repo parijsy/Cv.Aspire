@@ -1,0 +1,75 @@
+﻿@page "/querybyimage"
+@using Cv.Aspire.Web.Components.Layout.Custom;
+
+<PageTitle>Query by image</PageTitle>
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h1>Query by image</h1>
+            <div class="alert alert-info" role="alert">
+                This is the description of an old project from 2012.<br/>
+                Nowadays Azure supports building your <a href="https://learn.microsoft.com/en-us/azure/ai-services/custom-vision-service/getting-started-build-a-classifier">own classifier</a> in the Custom Vision Service which is part of their AI Services
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col col-12">
+            <h2>Introduction</h2>
+        </div>
+        <div class="col col-8">
+            <p>
+                A small program created using OpenCV that recognizes playing cards.
+                The program uses SURF descriptors for detecting the cards.
+                The program matches the input image to the images in its database (158 different cards) and displays the best match.
+                The cards belong to a trading card game.
+                People trade these cards, however not each card is worth the same amount.
+                Currently people look up the worth of each card by name, this program would allow people to look up a card by taking a picture.
+            </p>
+            <div class="alert alert-warning" role="alert">
+                Please note: This code is written using an old version of OpenCV 2 and is likely outdated.
+            </div>
+        </div>
+        <div class="col col-4">
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/vtuRVzHJDVM" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <h2>Training data</h2>
+            <p>
+                This function is used to train the data and then save it to a file so that it can be reused later on.<br />
+                <GithubGistSnippet Title="LoadData" UserId="parijsy" FileName="3f05b719abbc0da94ab008b39683c1c0.js?file=TrainData.cpp"></GithubGistSnippet>
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <h2>Load trained data</h2>
+            <p>
+                In this function the trained data is loaded from the file and inserted into the variable _matcher which will do the actual matching.<br/>
+            </p>
+            <GithubGistSnippet Title="LoadData" UserId="parijsy" FileName="3f05b719abbc0da94ab008b39683c1c0.js?file=LoadData.cpp"></GithubGistSnippet>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <h2>Query</h2>
+            <p>
+                Here we extract a descriptor from a query image which is then used find the best match.<br />
+                <GithubGistSnippet Title="LoadData" UserId="parijsy" FileName="3f05b719abbc0da94ab008b39683c1c0.js?file=Query.cpp"></GithubGistSnippet>
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <h2>Shared functions and variables</h2>
+            <p>
+                Here we have the definitions of the global variables, includes, and the functions that extract the keypoints and descriptors.
+                <GithubGistSnippet Title="LoadData" UserId="parijsy" FileName="3f05b719abbc0da94ab008b39683c1c0.js?file=Shared.cpp"></GithubGistSnippet>
+            </p>
+        </div>
+    </div>
+</div>
