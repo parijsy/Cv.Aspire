@@ -1,7 +1,4 @@
 ﻿@inherits GithubGistSnippetBase
-@rendermode @(new InteractiveServerRenderMode(prerender: false))
 
-<section class="[ flex flex-col ]">
-    <article id="@Id" class="[ bg-gray-300 ]">
-    </article>
-</section>
+@((MarkupString)stylesheet)
+@((MarkupString)snippet)
