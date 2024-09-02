@@ -7,8 +7,5 @@ public class TimePlugin
 {
     [KernelFunction]
     [Description("Get the current time")]
-    public DateTime SetThemeColors()
-    {
-        return DateTime.Now;
-    }
+    public DateTime GetCurrentTime() => DateTime.Now;
 }

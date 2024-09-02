@@ -16,12 +16,12 @@ public partial class Assistant
     private ChatHistory chat = new("When requested, you can change the theme colors of the app using CSS colors.");
     private List<ChatMessage> messages = [];
     private bool showAssistantAlert = false;
-    private System.Timers.Timer timer = new(5000);
+    private System.Timers.Timer alertTime = new(5000);
 
     protected override void OnInitialized()
     {
-        timer.Elapsed += OnAlertFinish;
-        timer.AutoReset = false;
+        alertTime.Elapsed += OnAlertFinish;
+        alertTime.AutoReset = false;
     }
 
     private async Task Submit()
@@ -62,8 +62,8 @@ public partial class Assistant
 
     private void HandleSubmitException()
     {
-        timer.Stop();
-        timer.Start();
+        alertTime.Stop();
+        alertTime.Start();
         showAssistantAlert = true;
         messages.RemoveAt(messages.Count - 1);
         StateHasChanged();
