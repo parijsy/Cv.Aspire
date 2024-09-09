@@ -86,19 +86,55 @@
         <div class="col-12">
             <h2>Skills</h2>
         </div>
-        @RenderSkill(("Prompt Engineering", 2))
-        @RenderSkill(("Large Language Models (LLM)", 3))
-        @RenderSkill(("Semantic Kernel", 2))
-        @RenderSkill(("Jira", 1))
-        @RenderSkill(("Windows Communication Foundation (WCF)", 4))
-        @RenderSkill(("Microsoft Azure", 2))
-        @RenderSkill(("DevOps", 1))
-        @RenderSkill(("Azure DevOps Server", 2))
-        @RenderSkill(("API Development", 2))
-        @RenderSkill(("Blazor", 1))
-        @RenderSkill(("Azure SignalR", 2))
-        @RenderSkill(("C#", 1))
-        @RenderSkill(("Javscript", 1))
+    </div>
+    <div class="row">
+        <div class="col-3">
+            <ul>
+                @RenderSkill(("C#"))
+                @RenderSkill(("C++"))
+                @RenderSkill(("Computer Vision"))
+                @RenderSkill(("Algorithms"))
+                @RenderSkill(("Artificial Intelligence (AI)"))
+                @RenderSkill(("Machine Learning"))
+                @RenderSkill(("Prompt Engineering"))
+                @RenderSkill(("Large Language Models (LLM)"))
+            </ul>
+        </div>
+        <div class="col-3">
+            <ul>
+                @RenderSkill(("Semantic Kernel"))
+                @RenderSkill(("Java"))
+                @RenderSkill(("JavaScript"))
+                @RenderSkill(("SQL"))
+                @RenderSkill(("Transact-SQL (T-SQL)"))
+                @RenderSkill(("HTML"))
+                @RenderSkill(("CSS"))
+                @RenderSkill(("XML"))
+            </ul>
+        </div>
+        <div class="col-3">
+            <ul>
+                @RenderSkill(("jQuery"))
+                @RenderSkill(("Web Applications"))
+                @RenderSkill(("API Development"))
+                @RenderSkill(("Web Development"))
+                @RenderSkill(("Back-End Web Development"))
+                @RenderSkill(("Front-End Development"))
+                @RenderSkill(("SignalR"))
+                @RenderSkill(("Microsoft Azure"))
+            </ul>
+        </div>
+        <div class="col-3">
+            <ul>
+                @RenderSkill(("Azure Devops"))
+                @RenderSkill(("Blazor"))
+                @RenderSkill((".NET"))
+                @RenderSkill(("Visual Studio"))
+                @RenderSkill(("Git"))
+                @RenderSkill(("Jira"))
+                @RenderSkill(("en meer..."))
+            </ul>
+        </div>
     </div>
     <div class="row">
         <div class="col">
@@ -182,5 +218,5 @@
 </div>
 
 @code {
-    private RenderFragment<(string skill, int colSize)> RenderSkill = x => @<div class="col col-@x.colSize">@x.skill</div>;
+    private RenderFragment<string> RenderSkill = x => @<li>@x</li>;
 }
